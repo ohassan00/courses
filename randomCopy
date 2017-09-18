@@ -1,0 +1,32 @@
+#!/bin/bash
+
+if [ $# -lt 3 ]; then
+        cat<<EOF 
+This script needs at least 3 arguments: the source directory, the
+target directory and the number of files/dirs to be copied. For example:
+
+    $0 /from /to 5
+
+EOF
+        exit
+fi 
+
+sourceDir="$1"
+targetDir="$2"
+number="$3"
+
+## Collect all file and directory names. The globstar
+## bash option lets ** match all files and directories
+## recursively
+shopt -s globstar
+dirsAndFiles=( ** )
+
+## Get $num random numbers from 0 until
+## the number of files and dirs found. This
+## will let us take a random selection.
+limit=$((${#dirsAndFiles[@]}-1))  
+numbers=$(shuf -i 0-"$limit" -n "$number")
+
+for num in $numbers; do
+    cp -rv "${dirsAndFiles[$num]}" "$targetDir"
+done
