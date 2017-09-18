@@ -19,7 +19,7 @@ number="$3"
 ## bash option lets ** match all files and directories
 ## recursively
 shopt -s globstar
-dirsAndFiles=( ** )
+dirsAndFiles=( "$1"/** )
 
 ## Get $num random numbers from 0 until
 ## the number of files and dirs found. This
