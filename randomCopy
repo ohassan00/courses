@@ -28,5 +28,5 @@ limit=$((${#dirsAndFiles[@]}-1))
 numbers=$(shuf -i 0-"$limit" -n "$number")
 
 for num in $numbers; do
-    cp -rv "${dirsAndFiles[$num]}" "$targetDir"
+    cp -r "${dirsAndFiles[$num]}" "$targetDir"
 done
